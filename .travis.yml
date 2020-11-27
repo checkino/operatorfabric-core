@@ -1,5 +1,5 @@
 os: linux
-dist: trusty
+dist: xenial
 addons:
     sonarcloud:
         organization: "opfab"
