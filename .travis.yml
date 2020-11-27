@@ -50,17 +50,17 @@ install:
   # if sdkman can't use the expected java version then asks sdkman to install it. Sdkman is configured to use it as default (line 26)
   - if [ "${CurrentJavacVersionNumber}" != "${FULL_JDK_VERSION}" ] ;
     then
-    if ! sdk default java "${JDK_VERSION_4_SDKMAN}" ; then
+    if ! sdk use java "${JDK_VERSION_4_SDKMAN}" ; then
     sdk install java "${JDK_VERSION_4_SDKMAN}" ;
     fi ;
     fi
-  - if [ -s ${SDKMAN_CONFIG_FILE} ]; then
-    if [ $(cat ${SDKMAN_CONFIG_FILE} | wc -l) -gt 1 ]; then
-    echo sdkman_auto_selfupdate=true > ${SDKMAN_CONFIG_FILE} ;
-    fi
-    else
-    echo sdkman_auto_selfupdate=true > ${SDKMAN_CONFIG_FILE} ;
-    fi
+  #- if [ -s ${SDKMAN_CONFIG_FILE} ]; then
+  #  if [ $(cat ${SDKMAN_CONFIG_FILE} | wc -l) -gt 1 ]; then
+  #  echo sdkman_auto_selfupdate=true > ${SDKMAN_CONFIG_FILE} ;
+  #  fi
+  #  else
+  #  echo sdkman_auto_selfupdate=true > ${SDKMAN_CONFIG_FILE} ;
+  #  fi
   - sudo apt-get install realpath
 jobs:
   include:
@@ -79,11 +79,12 @@ jobs:
         - rm -r ui/main/node_modules/ts-simple-ast
         # Sonar-scanner need java 11 to run properly [OC-1216]
         # as sdk is used need to install java 11 if not available
-        #- JDK_VERSION_4_SONAR="11.0.9-zulu"
-        #- if ! sdk use java "${JDK_VERSION_4_SONAR}" ;
-        #  then
-        #  sdk install java "${JDK_VERSION_4_SONAR}" ;
-        #  fi ;
+        
+        - JDK_VERSION_4_SONAR="11.0.9-zulu"
+        - if ! sdk use java "${JDK_VERSION_4_SONAR}" ;
+          then
+          sdk install java "${JDK_VERSION_4_SONAR}" ;
+          fi ;
         - sonar-scanner
         - docker-compose -f src/main/docker/test-environment/docker-compose.yml down
     - stage: doc
