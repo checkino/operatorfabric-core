@@ -34,6 +34,7 @@ import {EventType as OAuthType, JwksValidationHandler, OAuthEvent, OAuthService}
 import {implicitAuthenticationConfigFallback} from '@ofServices/authentication/auth-implicit-flow.config';
 import {redirectToCurrentLocation} from '../../app-routing.module';
 import {Router} from '@angular/router';
+import { noAuto } from '@fortawesome/fontawesome-svg-core';
 
 
 export enum LocalStorageAuthContent {
@@ -126,6 +127,8 @@ export class AuthenticationService {
                 , this.givenNameClaim
                 , this.familyNameClaim);
         }
+        if (mode.toLowerCase() === 'none') return new NoAuthenticationHandler(this.store,this.router);
+
         return new PasswordOrCodeAuthenticationHandler(this, this.store);
     }
 
@@ -526,6 +529,30 @@ export class ImplicitAuthenticationHandler implements AuthenticationModeHandler 
 
     public extractToken(): string {
         return this.storage.getItem('access_token');
+    }
+
+}
+
+// Use in case we have no authentication process via opfab 
+// The token is provide by an intermediate between the browser and the web-ui (Specific SSO implementation)
+// We get the user information by calling endpoint /currentUserWithPerimeters
+
+export class NoAuthenticationHandler implements AuthenticationModeHandler {
+
+
+    constructor( private store: Store<AppState>,private router: Router) {
+    }
+
+    initializeAuthentication(currentLocationHref: string) {
+        // Call userWithPerimeterEndPoint 
+
+        // Get all the information and send the AcceptLogin Event  
+        this.store.dispatch(new AcceptLogIn(new PayloadForSuccessfulAuthentication('operator1',null,null, null, null, null)));
+        redirectToCurrentLocation(this.router);
+    }
+
+    public extractToken(): string {
+        return "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJSbXFOVTNLN0x4ck5SRmtIVTJxcTZZcTEya1RDaXNtRkw5U2NwbkNPeDBjIn0.eyJqdGkiOiI3MTg4YjBjYS01ZTUwLTRiM2YtOTA4Yi1iOGQzMmJmMGI0ODIiLCJleHAiOjE2MTI1MjgzNTAsIm5iZiI6MCwiaWF0IjoxNjEyNTI3NDUwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojg5L2F1dGgvcmVhbG1zL2RldiIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI3OTNjNDY2Ni0xMTYyLTQ0YTAtYjM3Mi00MmZiYWEzNDhlNzgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJvcGZhYi1jbGllbnQiLCJub25jZSI6ImExRl9IRmFSY3FPcGtWLWlCOVVidzNxTm5acUZaMHhFeGtMaTFWeVYxaWhseCIsImF1dGhfdGltZSI6MTYxMjUyNzQ1MCwic2Vzc2lvbl9zdGF0ZSI6Ijc5ZGU3YThmLTRjNjEtNDBjYi1iODA5LTkwYmEwMGViNzc1MiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJzdWIiOiJvcGVyYXRvcjEiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImdyb3VwcyI6IkRpc3BhdGNoZXI7UmVhZE9ubHk7U3VwZXJ2aXNvciIsInByZWZlcnJlZF91c2VybmFtZSI6Im9wZXJhdG9yMSIsImdpdmVuX25hbWUiOiIiLCJlbnRpdGllc0lkIjoiRU5USVRZMTtFTlRJVFkzIiwiZmFtaWx5X25hbWUiOiIifQ.X7Dxf3kSEkEb97MAeKv1SlzFeh6w6BRSIl77aniENRgfHGcqvZkwdztxX_R9jfvQUTtaV2hBMY6tb_IQhJR-xCcD9DawojOQ_Pmj9xWjnwi-bbG-iNcyfZ63wEE_bSbGsw1N0Pl2w_ZvgDJCM_Ha5mdofPgqKc9VOpDnTvVbB5Lj6s-LlkZnHN-B21pPZCi4DsPMiuQdFobH_7DdV0-DbnmtR48CBPGZagQcuVDxClgxJQXnug_RZXzDwTgrq6gnMTXEHpKpjk2xGHbp-GhKyMOvy6tVVe3gupHBvHTeWZ2wyQI7cJgnx2g9y6S8s25o7tS1dtEjpM_hMGSmNXhudw";
     }
 
 }

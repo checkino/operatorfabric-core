@@ -88,7 +88,7 @@
       "client-id": "opfab-client",
       "flow": {
         "delegate-url": "http://localhost:89/auth/realms/dev",
-        "mode": "IMPLICIT",
+        "mode": "NONE",
         "provider": "Opfab Keycloak"
       }
     },

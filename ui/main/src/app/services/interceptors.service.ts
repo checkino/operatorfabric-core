@@ -30,7 +30,7 @@ export class TokenInjector implements HttpInterceptor {
 
         const notCheckTokenRequest = !(url.endsWith('/auth/check_token') || url.endsWith('/auth/token') || url.endsWith('/auth/code'));
         if (notCheckTokenRequest) {
-            const securityHeader = this.authService.getSecurityHeader();
+            const securityHeader = this.authService.getSecurityHeader();  // To return null when none auth mode and in this case do not set header
             const update = {setHeaders: securityHeader};
             request = request.clone(update);
         }
