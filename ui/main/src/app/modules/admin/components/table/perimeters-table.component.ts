@@ -10,18 +10,18 @@
 
 import {Component, OnInit} from '@angular/core';
 import {AdminTableDirective, Field} from './admin-table.directive';
-import {EditEntityGroupModalComponent} from '../editmodal/groups-entities/edit-entity-group-modal.component';
 import {AdminItemType} from '../../services/sharing.service';
+import {EditUserModalComponent} from '../editmodal/users/edit-user-modal.component';
 
 @Component({
   templateUrl: 'admin-table.directive.html',
-  selector: 'of-entities-table'
+  selector: 'of-perimeters-table'
 })
-export class EntitiesTableComponent extends AdminTableDirective implements OnInit {
+export class PerimetersTableComponent extends AdminTableDirective implements OnInit {
 
-  tableType = AdminItemType.ENTITY;
-  fields = [new Field('id',3), new Field('name',3), new Field('description',5), new Field('parents',5, 'entityCellRenderer')];
+  tableType = AdminItemType.PERIMETER;
+  fields = [new Field('id'), new Field('process'), new Field('stateRights',7,'stateRightsCellRenderer')]; // TODO Create renderer for state rights
   idField = 'id';
-  editModalComponent = EditEntityGroupModalComponent;
+  editModalComponent = EditUserModalComponent;
 
 }

@@ -40,7 +40,7 @@ import {LightCard, Severity} from '@ofModel/light-card.model';
 import {AppService, PageType} from '@ofServices/app.service';
 import {User} from '@ofModel/user.model';
 import {Map} from '@ofModel/map';
-import {RightsEnum, userRight} from '@ofModel/userWithPerimeters.model';
+import {userRight} from '@ofModel/userWithPerimeters.model';
 import {ClearLightCardSelection, UpdateALightCard} from '@ofStore/actions/light-card.actions';
 import {UserService} from '@ofServices/user.service';
 import {EntitiesService} from '@ofServices/entities.service';
@@ -50,6 +50,7 @@ import {ConfigService} from '@ofServices/config.service';
 import {TimeService} from '@ofServices/time.service';
 import {AlertMessage} from '@ofStore/actions/alert.actions';
 import {MessageLevel} from '@ofModel/message.model';
+import {RightsEnum} from '@ofModel/perimeter.model';
 
 
 declare const templateGateway: any;

@@ -274,15 +274,24 @@
         "id": "Id",
         "name": "Name",
         "description": "Description",
+        "perimeters" : "Perimeters",
         "confirmDelete": "Do you really want to delete group",
         "add": "Add new group"
       },
       "entity": {
         "id": "Id",
         "name": "Name",
+        "parents": "Parent Entities",
         "description": "Description",
         "confirmDelete": "Do you really want to delete entity",
         "add": "Add new entity"
+      },
+      "perimeter": {
+        "id": "Id",
+        "process": "Process",
+        "stateRights": "State Rights",
+        "confirmDelete": "Do you really want to delete perimeter",
+        "add":"Add new perimeter"
       },
       "user": {
         "login": "Login",
@@ -322,9 +331,10 @@
       "lines": "lines per page"
     },
     "tabs": {
-      "users": "Users management",
-      "groups": "Groups management",
-      "entities": "Entities management"
+      "users": "Users Management",
+      "groups": "Groups Management",
+      "entities": "Entities Management",
+      "perimeters": "Perimeters Management"
     }
   },
   "service": {

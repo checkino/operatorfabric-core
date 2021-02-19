@@ -1,0 +1,36 @@
+<!-- Copyright (c) 2021, RTE (http://www.rte-france.com)                   -->
+<!-- See AUTHORS.txt                                                       -->
+<!-- This Source Code Form is subject to the terms of the Mozilla Public   -->
+<!-- License, v. 2.0. If a copy of the MPL was not distributed with this   -->
+<!-- file, You can obtain one at http://mozilla.org/MPL/2.0/.              -->
+<!-- SPDX-License-Identifier: MPL-2.0                                      -->
+<!-- This file is part of the OperatorFabric project.                      -->
+
+<span *ngFor="let stateRight of stateRightsValues">
+    <span class="badge opfab-bg-right-{{stateRight.right.toString()|lowercase}}" style="font-size: 14px; margin: 3px; color: black">{{stateRight.state}}</span>
+</span>
+
+
+<!-- <div style="margin: 3px" *ngFor="let stateRight of stateRightsValues">
+    <span>{{stateRight.state}}: </span><span class="badge opfab-bg-right-{{stateRight.right.toString()|lowercase}}" style="font-size: 14px;">{{stateRight.right}}</span>
+</div> -->
+
+<!--
+<span *ngFor="let stateRight of stateRightsValues">
+<div class="btn-group" style="margin: 5px">
+    <button type="button" class="btn-sm btn-secondary">{{stateRight.state}}</button>
+    <button type="button" class="btn-sm dropdown-toggle dropdown-toggle-split opfab-bg-right-{{stateRight.right.toString()|lowercase}}" data-bs-toggle="dropdown" aria-expanded="false">
+        <span>{{stateRight.right}}</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Write</a></li>
+        <li><a class="dropdown-item" href="#">ReceiveAndWrite</a></li>
+        <li><a class="dropdown-item" href="#">Receive</a></li>
+    </ul>
+</div>
+</span>
+-->
+
+
+
+

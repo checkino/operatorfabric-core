@@ -23,12 +23,14 @@ export const environment = {
         users: 'http://localhost:2002/users',
         groups: 'http://localhost:2002/users/groups',
         entities: 'http://localhost:2002/users/entities',
+        perimeters: 'http://localhost:2002/users/perimeters',
         archives: '',
         processes: 'http://localhost:2002/businessconfig/processes',
         processGroups: 'http://localhost:2002/businessconfig/processgroups',
         config: 'http://localhost:2002/config/web-ui.json',
         menuConfig: 'http://localhost:2002/config/ui-menu.json',
-        time: 'http://localhost:2002/time'
+        time: 'http://localhost:2002/time',
+
     },
     paths: {
         i18n: '/assets/i18n/'

@@ -7,34 +7,35 @@
  * This file is part of the OperatorFabric project.
  */
 
-import { Component, OnDestroy, TemplateRef, ElementRef, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '@ofStore/index';
-import { CardService } from '@ofServices/card.service';
-import { UserService } from '@ofServices/user.service';
-import { Card, CardData,fromCardToCardForPublishing, TimeSpan} from '@ofModel/card.model';
-import { I18n } from '@ofModel/i18n.model';
-import { Subject } from 'rxjs';
-import { Process } from '@ofModel/processes.model';
-import { TimeService } from '@ofServices/time.service';
-import { Severity } from '@ofModel/light-card.model';
-import { Guid } from 'guid-typescript';
-import { NgbDateStruct,NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
-import { UserWithPerimeters, RightsEnum, ComputedPerimeter } from '@ofModel/userWithPerimeters.model';
-import { EntitiesService } from '@ofServices/entities.service';
-import { ProcessesService } from '@ofServices/processes.service';
-import { ActivatedRoute} from '@angular/router';
-import { DateTimeNgb, getDateTimeNgbFromMoment } from '@ofModel/datetime-ngb.model';
+import {Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {AppState} from '@ofStore/index';
+import {CardService} from '@ofServices/card.service';
+import {UserService} from '@ofServices/user.service';
+import {Card, CardData, fromCardToCardForPublishing, TimeSpan} from '@ofModel/card.model';
+import {I18n} from '@ofModel/i18n.model';
+import {Subject} from 'rxjs';
+import {Process} from '@ofModel/processes.model';
+import {TimeService} from '@ofServices/time.service';
+import {Severity} from '@ofModel/light-card.model';
+import {Guid} from 'guid-typescript';
+import {NgbDateStruct, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {ComputedPerimeter, UserWithPerimeters} from '@ofModel/userWithPerimeters.model';
+import {EntitiesService} from '@ofServices/entities.service';
+import {ProcessesService} from '@ofServices/processes.service';
+import {ActivatedRoute} from '@angular/router';
+import {DateTimeNgb, getDateTimeNgbFromMoment} from '@ofModel/datetime-ngb.model';
 import * as moment from 'moment-timezone';
-import { HandlebarsService } from '../cards/services/handlebars.service';
-import { DetailContext } from '@ofModel/detail-context.model';
-import { map } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
-import { MessageLevel } from '@ofModel/message.model';
-import { AlertMessage } from '@ofStore/actions/alert.actions';
+import {HandlebarsService} from '../cards/services/handlebars.service';
+import {DetailContext} from '@ofModel/detail-context.model';
+import {map} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
+import {MessageLevel} from '@ofModel/message.model';
+import {AlertMessage} from '@ofStore/actions/alert.actions';
+import {RightsEnum} from '@ofModel/perimeter.model';
 
 declare const templateGateway: any;
 
@@ -63,24 +64,24 @@ export class UserCardComponent implements OnDestroy, OnInit {
     });
 
     stateOptions: any[];
-    recipientsOptions = new Array();
+    recipientsOptions = [];
     selectedRecipients = [];
     dropdownSettings = {};
-    processOptions = new Array();
-    processOptionsWhenSelectedService = new Array();
-    serviceOptions = new Array();
+    processOptions = [];
+    processOptionsWhenSelectedService = [];
+    serviceOptions = [];
 
     selectedProcess: Process;
     selectedState: string;
     processesPerServices = new Map();
     servicePerProcesses = new Map();
-    processesWithoutService = new Array();
+    processesWithoutService = [];
     statesPerProcesses = new Map();
     userCardTemplate: SafeHtml;
     editCardMode = false;
     cardToEdit: CardData;
 
-    @Input() cardIdToEdit = null; 
+    @Input() cardIdToEdit = null;
     public card: Card;
 
     readonly defaultStartDate = new Date().valueOf() + 60000;
@@ -151,7 +152,7 @@ export class UserCardComponent implements OnDestroy, OnInit {
             badgeShowLimit: 30,
             enableSearchFilter: true
         };
-        
+
         this.loadCardForEdition();
     }
 

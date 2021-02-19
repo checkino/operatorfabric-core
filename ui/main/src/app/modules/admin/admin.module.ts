@@ -24,11 +24,13 @@ import {EntitiesTableComponent} from './components/table/entities-table.componen
 import {GroupsTableComponent} from './components/table/groups-table.component';
 import {AgGridModule} from 'ag-grid-angular';
 import {MultiFilterModule} from '../share/multi-filter/multi-filter.module';
-import {ArrayCellRendererComponent} from './components/table/array-cell-renderer.component';
-import {ActionCellRendererComponent} from './components/table/action-cell-renderer.component';
-import {GroupCellRendererComponent} from './components/table/group-cell-renderer.component';
-import {EntityCellRendererComponent} from './components/table/entity-cell-renderer.component';
+import {ArrayCellRendererComponent} from './components/cell-renderers/array-cell-renderer.component';
+import {ActionCellRendererComponent} from './components/cell-renderers/action-cell-renderer.component';
+import {GroupCellRendererComponent} from './components/cell-renderers/group-cell-renderer.component';
+import {EntityCellRendererComponent} from './components/cell-renderers/entity-cell-renderer.component';
 import {SharingService} from './services/sharing.service';
+import {PerimetersTableComponent} from './components/table/perimeters-table.component';
+import {StateRightsCellRendererComponent} from './components/cell-renderers/state-rights-cell-renderer.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +38,15 @@ import {SharingService} from './services/sharing.service';
     UsersTableComponent,
     EntitiesTableComponent,
     GroupsTableComponent,
+    PerimetersTableComponent,
     EditUserModalComponent,
     ConfirmationDialogComponent,
     EditEntityGroupModalComponent,
     ActionCellRendererComponent,
     ArrayCellRendererComponent,
     GroupCellRendererComponent,
-    EntityCellRendererComponent
+    EntityCellRendererComponent,
+    StateRightsCellRendererComponent
   ],
 
 
@@ -58,7 +62,8 @@ import {SharingService} from './services/sharing.service';
       ActionCellRendererComponent,
       ArrayCellRendererComponent,
       GroupCellRendererComponent,
-      EntityCellRendererComponent
+      EntityCellRendererComponent,
+      StateRightsCellRendererComponent
     ]])
   ],
   providers: [

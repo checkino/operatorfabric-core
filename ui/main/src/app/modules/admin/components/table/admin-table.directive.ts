@@ -16,11 +16,12 @@ import {Subject, throwError} from 'rxjs';
 import {ConfirmationDialogService} from '../../services/confirmation-dialog.service';
 import {AppError} from '../../../../common/error/app-error';
 import {CrudService} from '@ofServices/crud-service';
-import {ActionCellRendererComponent} from './action-cell-renderer.component';
-import {EntityCellRendererComponent} from './entity-cell-renderer.component';
-import {GroupCellRendererComponent} from './group-cell-renderer.component';
+import {ActionCellRendererComponent} from '../cell-renderers/action-cell-renderer.component';
+import {EntityCellRendererComponent} from '../cell-renderers/entity-cell-renderer.component';
+import {GroupCellRendererComponent} from '../cell-renderers/group-cell-renderer.component';
 import {AdminItemType, SharingService} from '../../services/sharing.service';
 import {takeUntil} from 'rxjs/operators';
+import {StateRightsCellRendererComponent} from '../cell-renderers/state-rights-cell-renderer.component';
 
 @Directive()
 @Injectable()
@@ -60,7 +61,8 @@ export abstract class AdminTableDirective implements OnInit, OnDestroy {
       frameworkComponents : {
         actionCellRenderer: ActionCellRendererComponent,
         groupCellRenderer: GroupCellRendererComponent,
-        entityCellRenderer: EntityCellRendererComponent
+        entityCellRenderer: EntityCellRendererComponent,
+        stateRightsCellRenderer: StateRightsCellRendererComponent
       },
       domLayout: 'autoHeight',
       defaultColDef : {
@@ -79,7 +81,9 @@ export abstract class AdminTableDirective implements OnInit, OnDestroy {
         'dataColumn': {
           sortable: true,
           filter: true,
-          flex: 2
+          wrapText: true,
+          autoHeight: true,
+          flex: 4,
         }
       },
       localeTextFunc : function (key) {
@@ -236,4 +240,6 @@ export class Field {
     this.flex = flex;
     this.cellRendererName = cellRendererName;
   }
+
+  // TODO could the cellRenderer definition in frameworkComponents be moved to an Enum or other object? So the property in field can be type-checked
 }
